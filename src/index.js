@@ -1,19 +1,15 @@
 const API_LINK = "http://localhost:3000/";
 const tableBody = document.querySelector("tbody");
-
-// const fullHeart = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-//                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-//                     </svg>`
-// const emptyHeart = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-//                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-//                     </svg>`
+let img; 
 let menuItems = [];
 
 // https://projectserver-te7c.onrender.com/api/
 
 document.addEventListener("DOMContentLoaded", function main(){
     const form = document.querySelector("#form");
+    document.querySelector("input[type='file'").addEventListener('change', handleFileInput)
     form.addEventListener("submit", postData)
+    document.querySelector("contact-form").addEventListener('submit', sendMessage)
     getData()
     filter()
     search()
@@ -29,17 +25,15 @@ function getData(){
     })
 }
 
-let img; 
-let data;
+
 function postData(e){
     e.preventDefault()
-    const formdata = new FormData(e.target) 
-    handleFileInput(formdata.get("image"))
-
-    data = {
+    const formdata = new FormData(e.target)     
+    let data = {
         id : String(menuItems.length + 1),
         name: formdata.get("name"),
         diet: formdata.get("diet").split(" "),
+        image: img,
         category: formdata.get("category"),
         description: formdata.get("description"),
         likes: 0
@@ -59,6 +53,7 @@ function postData(e){
         e.target.reset()
     })
 }
+
 
 function displayData(data) {
     data.forEach(element => {
@@ -109,13 +104,12 @@ function foodDisplay(data){
 function handleLike(e){
     let p = e.target.parentNode.parentNode.firstElementChild;
     e.target.innerHTML = '<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>'
-    setTimeout(()=>{
+    setTimeout(() => {
         e.target.innerHTML =  '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>'   
     }, 2000)
-    menuItems.find((item)=>{
+    menuItems.find((item, index)=>{
         if (item.name === p.textContent)
         {
-            
             let likes = item.likes+1
             fetch(`${API_LINK}menuItems/${item.id}`,{
                 method: 'PATCH',
@@ -126,7 +120,10 @@ function handleLike(e){
                 body: JSON.stringify({likes: likes})
             })
             .then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                console.log(data)
+                menuItems[index].likes = data.likes
+            })
         }
     })
 
@@ -144,7 +141,7 @@ function handleClick(e) {
             image.src = item.image
             image.alt = item.name
             description.textContent = item.description
-            console.log(description)
+            
         }
     })
 }
@@ -173,22 +170,17 @@ function updateDisplays(data){
                 </div>
             </div>
         </div>
-    `
-    
+    `  
 }
 
-function handleFileInput(input) {
-    const file = input
-    // Read the file
-    debugger
-    const reader = new FileReader();
-    reader.onload = () => {
-        const blob = new Blob([reader.result], { type:"image/jpeg" });
-        data.image = URL.createObjectURL(blob);
-        console.log(img); // Much shorter than Base64
-    };
-    reader.readAsArrayBuffer(file);
-
+function handleFileInput(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader;
+    reader.onload = ()=>{
+        // const blob = new Blob([reader.result])
+        img = reader.result
+    }  
+    reader.readAsDataURL(file)
 }
 // "https://cdn.pixabay.com/photo/2022/06/07/20/52/curry-7249248_640.jpg"
 // assets/images/applepie.jpeg
