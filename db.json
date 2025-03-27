@@ -1,5 +1,144 @@
 {
-    "menuItems":[
-        
-    ]
+  "menuItems": [
+    {
+      "id": "0",
+      "name": "rice and beans",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "image": "assets/images/applepie.jpeg",
+      "category": "glutten free",
+      "description": "very nice",
+      "likes": 7
+    },
+    {
+      "id": "1",
+      "name": "Chapo beans",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "image": "https://cdn.pixabay.com/photo/2022/06/07/20/52/curry-7249248_640.jpg",
+      "category": "Wheat",
+      "description": "Very Delicious",
+      "likes": 5
+    },
+    {
+      "id": "2",
+      "name": "Chapo beans",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "image": "https://cdn.pixabay.com/photo/2022/06/07/20/52/curry-7249248_640.jpg",
+      "category": "Wheat",
+      "description": "Very Delicious",
+      "likes": 5
+    },
+    {
+      "id": "3",
+      "name": "Chapo beans",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "image": "https://cdn.pixabay.com/photo/2022/06/07/20/52/curry-7249248_640.jpg",
+      "category": "Wheat",
+      "description": "Very Delicious",
+      "likes": 5
+    },
+    {
+      "id": "4",
+      "name": "blob trial",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "image": "blob:http://127.0.0.1:5500/a87c8bd4-d476-4eee-aabe-00e18215d59d",
+      "category": "pannakes",
+      "description": "adsadsafasdf",
+      "likes": 4
+    },
+    {
+      "id": "5",
+      "name": "bjbjbjj",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "image": "blob:http://127.0.0.1:5500/f4c40f96-ae85-44d2-86f5-ca015214f509",
+      "category": "jijijiji",
+      "description": "jijijiiji",
+      "likes": 4
+    },
+    {
+      "id": "6",
+      "name": "trial",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "category": "hhg",
+      "description": "jhgjhg",
+      "likes": 4
+    },
+    {
+      "id": "8",
+      "name": "Chapati beans",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "category": "Gluten",
+      "description": "hahahhahah",
+      "likes": 0
+    },
+    {
+      "id": "9",
+      "name": "Chapati",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "category": "asdasda",
+      "description": "asdadsdsds",
+      "likes": 0
+    },
+    {
+      "id": "10",
+      "name": "Tonkotsu ramen",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "category": "aser",
+      "description": "aser",
+      "likes": 1
+    },
+    {
+      "id": "11",
+      "name": "Tonkotsu ramen",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "category": "aser",
+      "description": "aser",
+      "likes": 1
+    },
+    {
+      "id": "12",
+      "name": "Tonkotsu ramen",
+      "diet": [
+        "(VG)",
+        "(VE)"
+      ],
+      "category": "aser",
+      "description": "aser",
+      "likes": 1
+    }
+  ],
+  "messages": [],
+  "orders": []
 }

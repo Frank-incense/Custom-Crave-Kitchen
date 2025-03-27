@@ -77,3 +77,67 @@ h3{
 textarea{
     margin-bottom: 20px;
 }
+
+#food-gallery{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-content: center;
+    gap: 20px;
+}
+#food-gallery .card{
+    width: 24rem;
+    margin: auto;
+}
+
+@media  only screen and (max-width: 1500px) {
+    #food-gallery{
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        align-content: center;
+        gap: 20px;
+    }
+    #food-gallery div.card{
+        width: 20rem;
+        margin: auto;
+    }
+}
+@media  only screen and (max-width: 1000px) {
+    #food-gallery{
+        display: grid;
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 20px;
+    }
+    #food-gallery div.card{
+        width: 24rem;
+        margin: auto;
+    }
+}
+#food-gallery img {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    object-fit: cover;
+    /* border-top-left-radius: 15px;
+    border-top-right-radius: 15px; */
+}
+.modal-body{
+    width: 100%;
+}
+.modal-body img{
+    border-radius: 10px;
+    width: 100%;
+    margin: auto;
+}
+.modal-body p {
+    margin: 10px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.d-flex{
+    justify-content: space-between;
+}
