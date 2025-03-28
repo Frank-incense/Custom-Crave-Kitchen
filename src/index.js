@@ -1,9 +1,9 @@
 
-const API_LINK = "https://projectserver-te7c.onrender.com/api/";
+const API_LINK = "http://localhost:3000/"
 const tableBody = document.querySelector("tbody");
 let img;
 let menuItems = [];
-
+// https://projectserver-te7c.onrender.com/api/
 document.addEventListener("DOMContentLoaded", function main(){
     const form = document.querySelector("#form");
     document.querySelector("input[type='file']").addEventListener('change', handleFileInput)
@@ -43,9 +43,8 @@ function sendMessage(e){
         body: JSON.stringify(data)
     })
     .then(res=>res.json())
-    .then(messages => messages)
+    .then(messages => displayMessage(messages))
     e.target.reset()
-    addComments()
 }
 
 function postData(e){
@@ -360,11 +359,3 @@ function displayMessage(messages){
     })
 }
 
-function sortItems(){
-    foodGallery.innerHTML = ""
-    let likes = menuItems.map((item)=>{
-        return menuItems.likes
-    })
-    console.log(likes)
-
-}
