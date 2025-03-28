@@ -1,5 +1,5 @@
 
-const API_LINK = "http://localhost:3000/";
+const API_LINK = "https://projectserver-te7c.onrender.com/api/";
 const tableBody = document.querySelector("tbody");
 let img;
 let menuItems = [];
