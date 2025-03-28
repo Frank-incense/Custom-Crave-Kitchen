@@ -202,13 +202,13 @@ input#search{
     justify-content: space-between;
 }
 
-.btn,.editbtn{
+.btn{
     background-color: var(--dark-brown);
     color: var(--light-brown);
     font-size: 1.2rem;
 }
 
-.btn:hover, .editbtn:hover{
+.btn:hover{
     background-color: var(--light-brown);
     color: var(--dark-brown);
 }
@@ -222,6 +222,9 @@ input#search{
 .contact{
     font-size: 1.3rem;
 }
+tr{
+    align-items: center;
+}
 
 .btn-secondary, .delbtn{
     background-color: var(--less-dark-brown);
@@ -233,4 +236,17 @@ input#search{
 .btn-secondary:hover{
     background-color: var(--less-dark-brown);
     color: var(--light-brown);
+}
+.list-group-item{
+    font-size: 1.2rem;
+    color: var(--dark-brown);
+}
+.list-group-item span:first-of-type{
+    background-color: var(--dark-brown);
+    color: var(--light-brown);
+    border-radius: 50%;
+    padding: 5px;
+}
+.list-group-item p{
+    margin:2px 45px;
 }

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function main(){
     getData()
     filter()
     search()
-    
+    addComments()
 })
 
 function getData(){
@@ -44,6 +44,7 @@ function sendMessage(e){
     .then(res=>res.json())
     .then(messages => messages)
     e.target.reset()
+    addComments()
 }
 
 function postData(e){
@@ -83,8 +84,8 @@ function displayData(data) {
                 <td>${element.category}</td>
                 <td>${element.description}</td>
                 <td>
-                    <button type="button" class="editbtn">Edit</button>
-                    <button type="button" class="delbtn">Delete</button>
+                    <button type="button" class="editbtn btn">Edit</button>
+                    <button type="button" class="delbtn btn-secondary">Delete</button>
                 </td>
             </tr>
         `
@@ -180,8 +181,8 @@ function updateDisplays(data){
                 <td>${data.category}</td>
                 <td>${data.description}</td>
                 <td>
-                    <button type="button" class="editbtn">Edit</button>
-                    <button type="button" class="delbtn">Delete</button>
+                    <button type="button" class="editbtn btn">Edit</button>
+                    <button type="button" class="delbtn btn-secondary">Delete</button>
                 </td>
             </tr>
         `
@@ -234,7 +235,6 @@ function handlefilter(e){
        let filtereditems = menuItems.filter((item)=>{
             for (let diet of item.diet){
     
-                console.log(diet)
                 if (e.target.value === diet){
                     return item
                 }
@@ -261,6 +261,7 @@ function handleSearch(e){
     foodGallery.innerHTML = '' 
     foodDisplay(filtereditems)
 }
+
 function patchData(dataObj){
     for (let key in dataObj){
         if (dataObj[key] === "")
@@ -284,8 +285,8 @@ function patchData(dataObj){
             <td>${data.category}</td>
             <td>${data.description}</td>
             <td>
-                <button type="button" class="editbtn">Edit</button>
-                <button type="button" class="delbtn">Delete</button>
+                <button type="button" class="editbtn btn">Edit</button>
+                <button type="button" class="delbtn btn-secondary">Delete</button>
             </td>
         `
         menuItems[dataObj.id] = data
@@ -301,7 +302,6 @@ function editFood(){
 } 
 
 function editItem(e){
-    const form = document.createElement("form")
     let parent = e.target.parentNode.parentElement
     const Update ={
         id : parent.id,
@@ -316,7 +316,6 @@ function editItem(e){
 
 function deleteFood() {
     const del = document.querySelectorAll(".delbtn");
-    console.log(del)
     del.forEach(delbtn =>{
         delbtn.addEventListener("click", deleteItem)
     })
@@ -333,5 +332,28 @@ function deleteItem(e){
         }
     })
     .then(res=>res.json())
-    .then(data=>console.log(data))
+    .then(data=>data)
+}
+
+function addComments(){
+    fetch(`${API_LINK}messages`)
+    .then(res=>res.json())
+    .then(messages => {
+        displayMessage(messages)
+    })
+}
+
+function displayMessage(messages){
+    const listGroup = document.querySelector(".list-group")
+    messages.forEach((message)=>{
+        listGroup.innerHTML +=`
+        <div class="list-group-item">
+            <div>
+                <span>${message.firstName.charAt(0)}${message.lastName.charAt(0)}</span>
+                <span>${message.firstName} ${message.lastName}</span>
+            </div>
+            <p>${message.message}</p>
+        </div>
+        `
+    })
 }
