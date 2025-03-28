@@ -6,7 +6,7 @@ let menuItems = [];
 
 document.addEventListener("DOMContentLoaded", function main(){
     const form = document.querySelector("#form");
-    document.querySelector("input[type='file'").addEventListener('change', handleFileInput)
+    document.querySelector("input[type='file']").addEventListener('change', handleFileInput)
     form.addEventListener("submit", postData)
     document.querySelector("#contact-form").addEventListener('submit', sendMessage)
     getData()
