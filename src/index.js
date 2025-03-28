@@ -1,15 +1,14 @@
-const API_LINK = "http://localhost:3000/";
+
+const API_LINK = "https://projectserver-te7c.onrender.com/api/";
 const tableBody = document.querySelector("tbody");
 let img; 
 let menuItems = [];
-
-// https://projectserver-te7c.onrender.com/api/
 
 document.addEventListener("DOMContentLoaded", function main(){
     const form = document.querySelector("#form");
     document.querySelector("input[type='file'").addEventListener('change', handleFileInput)
     form.addEventListener("submit", postData)
-    document.querySelector("contact-form").addEventListener('submit', sendMessage)
+    document.querySelector("#contact-form").addEventListener('submit', sendMessage)
     getData()
     filter()
     search()
@@ -25,6 +24,26 @@ function getData(){
     })
 }
 
+function sendMessage(e){
+    e.preventDefault()
+    const form = new FormData(e.target)
+    const data = {
+        "firstName": form.get("firstname"),
+        "lastName": form.get("secondname"),
+        "phone": form.get("phone"),
+        "message": form.get("message")
+    }
+    fetch(`${API_LINK}messages`,{
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res=>res.json())
+    .then(messages => messages)
+    e.target.reset()
+}
 
 function postData(e){
     e.preventDefault()
