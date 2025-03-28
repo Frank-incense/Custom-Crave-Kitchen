@@ -197,6 +197,10 @@ input#search{
     font-size: 1.2rem;
 }
 
+.card {
+    height: 500px;
+}
+
 .modal-footer {
     display: flex;
     justify-content: space-between;

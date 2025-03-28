@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function main(){
     filter()
     search()
     addComments()
+    sortItems()
 })
 
 function getData(){
@@ -56,6 +57,7 @@ function postData(e){
         diet: formdata.get("diet").split(" "),
         image: img,
         category: formdata.get("category"),
+        short: formdata.get("short"),
         description: formdata.get("description"),
         likes: 0
     }
@@ -82,7 +84,7 @@ function displayData(data) {
             <tr id="${element.id}">
                 <td>${element.name}</td>
                 <td>${element.category}</td>
-                <td>${element.description}</td>
+                <td>${element.short}</td>
                 <td>
                     <button type="button" class="editbtn btn">Edit</button>
                     <button type="button" class="delbtn btn-secondary">Delete</button>
@@ -103,7 +105,7 @@ function foodDisplay(data){
             <img src="${food.image}" class="card-img-top" alt="${food.name}">
             <div class="card-body">
                 <h5 class="card-title">${food.name}</h5>
-                <p class="card-text">${food.description}</p>
+                <p class="card-text">${food.short}</p>
                 <div class="flex">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#foodModal">
                         View
@@ -179,7 +181,7 @@ function updateDisplays(data){
             <tr id="${data.id}">
                 <td>${data.name}</td>
                 <td>${data.category}</td>
-                <td>${data.description}</td>
+                <td>${data.short}</td>
                 <td>
                     <button type="button" class="editbtn btn">Edit</button>
                     <button type="button" class="delbtn btn-secondary">Delete</button>
@@ -191,7 +193,7 @@ function updateDisplays(data){
             <img src="${data.image}" class="card-img-top" alt="${data.name}">
             <div class="card-body">
                 <h5 class="card-title">${data.name}</h5>
-                <p class="card-text">${data.description}</p>
+                <p class="card-text">${data.short}</p>
                 <div>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#foodModal">
                         View
@@ -356,4 +358,13 @@ function displayMessage(messages){
         </div>
         `
     })
+}
+
+function sortItems(){
+    foodGallery.innerHTML = ""
+    let likes = menuItems.map((item)=>{
+        return menuItems.likes
+    })
+    console.log(likes)
+
 }
