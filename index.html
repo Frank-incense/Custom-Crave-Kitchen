@@ -52,6 +52,9 @@ Demo - 5min -->
                             <th>
                                 Description
                             </th>
+                            <th>
+
+                            </th>
                         </thead>
                         <tbody class="table-group-divider">
 
@@ -87,6 +90,11 @@ Demo - 5min -->
                                     <label for="category">Category</label>
                                     <input type="text" name="category" id="category" required class="form-control">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="category">Short Description</label>
+                                    <input type="text" name="short" id="short" required class="form-control">
+                                </div>
         
                                 <div class="form-group">
                                     <label for="description">Desription</label>
@@ -102,7 +110,9 @@ Demo - 5min -->
                     </div>
                     </div>
                 </div>
-                
+                <div id="messages">
+                    
+                </div>
                 
             </div>
 
@@ -172,7 +182,12 @@ Demo - 5min -->
                                 <p></p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <p id="likes"></p>
+                                <div class="buttons">
+                                    <button type="button" class="btn btn-primary">Order</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -180,7 +195,7 @@ Demo - 5min -->
             </div>
 
             <div class="tab-pane fade" id="contact-tab-pane">
-                <div>
+                <div class="contact">
                     <h3>Contact Us</h3>
                     <p>
                         Have a question, special request, or just want to say hello? We’d love to hear from you! Whether you're looking for customized meal plans, partnership opportunities, or feedback on our meals, we’re here to help.

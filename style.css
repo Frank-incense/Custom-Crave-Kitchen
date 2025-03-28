@@ -1,6 +1,6 @@
 :root{
     --dark-brown: #432818;
-    --less-dark-brown: #6f1d6b;
+    --less-dark-brown: #6f1d1b;
     --brown: #99582a;
     --light-brown: #ffd780;
 }
@@ -34,46 +34,73 @@ h3{
 .content{
     font-size: 1.2em;
 }
+
 .content p {
     margin: 20px 0;
 }
+
 .content img {
     width: 60%;
     max-width: 600px;
     margin: 20px auto;
 }
-
-.top{
+ #form {
+    font-size: 1.2em;
+    font-weight: 400;
+ }
+ .table{
+    font-size: 1.2em;
+ }
+.top {
     text-align: center;
     padding: 50px;
     border-bottom: 1px solid var(--light-brown);
 }
 
-.selectItems{
+.top h3 {
+    font-size: 2.3rem;
+    font-weight: 600;
+}
+
+.top p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 2rem;
+}
+
+.selectItems {
     border-bottom: 1px solid var(--light-brown);
     height: 50px;
     margin: 10px;
 }
-.details{
-    font-size: 1.2em;
+
+.details {
     display: flex;
     justify-content: space-around;
 }
-.email{
+
+.email {
     color: var(--dark-brown);
     text-decoration: none;
 }
-.email:hover{
+
+.email:hover {
     color: var(--brown);
     text-decoration: underline;
 }
-#contact-tab-pane{
+
+#contact-tab-pane {
     text-align: center;
 }
+
 #contact-form{
     text-align: left;
     width: 50%;
     margin: 50px auto;
+}
+#contact-form label{
+    font-size: 1.2rem;
+    margin: 5px;
 }
 textarea{
     margin-bottom: 20px;
@@ -87,6 +114,7 @@ textarea{
     gap: 20px;
     row-gap: 30px;
 }
+
 #food-gallery .card{
     width: 24rem;
     margin: auto;
@@ -104,6 +132,7 @@ textarea{
         margin: auto;
     }
 }
+
 @media  only screen and (max-width: 1000px) {
     #food-gallery{
         display: grid;
@@ -116,6 +145,7 @@ textarea{
         margin: auto;
     }
 }
+
 #food-gallery img {
     width: 100%;
     max-width: 400px;
@@ -123,17 +153,21 @@ textarea{
     object-fit: cover;
     
 }
+
 .modal-body{
     width: 100%;
 }
+
 .modal-body img{
     border-radius: 10px;
     width: 100%;
     margin: auto;
 }
+
 .modal-body p {
     margin: 10px;
 }
+
 .flex{
     display: flex;
     justify-content: space-between;
@@ -143,9 +177,60 @@ textarea{
 th{
     width: 20%;
 }
+
 input#glutten{
     margin-left: 10px;
 }
+
 input#search{
     width: 300px;
+}
+
+.modal-body img{
+    height: 400px;
+    object-fit: cover;
+}
+
+#likes{
+    margin: 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn,.editbtn{
+    background-color: var(--dark-brown);
+    color: var(--light-brown);
+    font-size: 1.2rem;
+}
+
+.btn:hover, .editbtn:hover{
+    background-color: var(--light-brown);
+    color: var(--dark-brown);
+}
+
+.diet{
+    background-color: white;
+    border: 0px;
+    color: var(--dark-brown);
+}
+
+.contact{
+    font-size: 1.3rem;
+}
+
+.btn-secondary, .delbtn{
+    background-color: var(--less-dark-brown);
+    color: var(--light-brown);
+    border: 0px;
+    border-radius: 10px;
+    padding: 5px;
+}
+.btn-secondary:hover{
+    background-color: var(--less-dark-brown);
+    color: var(--light-brown);
 }

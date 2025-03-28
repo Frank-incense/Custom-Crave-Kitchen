@@ -1,7 +1,7 @@
 
-const API_LINK = "https://projectserver-te7c.onrender.com/api/";
+const API_LINK = "http://localhost:3000/";
 const tableBody = document.querySelector("tbody");
-let img; 
+let img;
 let menuItems = [];
 
 document.addEventListener("DOMContentLoaded", function main(){
@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function main(){
     getData()
     filter()
     search()
+    
 })
 
 function getData(){
@@ -28,10 +29,10 @@ function sendMessage(e){
     e.preventDefault()
     const form = new FormData(e.target)
     const data = {
-        "firstName": form.get("firstname"),
-        "lastName": form.get("secondname"),
-        "phone": form.get("phone"),
-        "message": form.get("message")
+        firstName: form.get("firstname"),
+        lastName: form.get("secondname"),
+        phone: form.get("phone"),
+        message: form.get("message")
     }
     fetch(`${API_LINK}messages`,{
         method: "POST",
@@ -77,13 +78,19 @@ function postData(e){
 function displayData(data) {
     data.forEach(element => {
         tableBody.innerHTML += `
-            <tr>
+            <tr id="${element.id}">
                 <td>${element.name}</td>
                 <td>${element.category}</td>
                 <td>${element.description}</td>
+                <td>
+                    <button type="button" class="editbtn">Edit</button>
+                    <button type="button" class="delbtn">Delete</button>
+                </td>
             </tr>
         `
     });
+    editFood()
+    deleteFood()
 }
 
 const foodGallery = document.querySelector("#food-gallery")
@@ -125,7 +132,7 @@ function handleLike(e){
     e.target.innerHTML = '<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>'
     setTimeout(() => {
         e.target.innerHTML =  '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>'   
-    }, 2000)
+    }, 2000);
     menuItems.find((item, index)=>{
         if (item.name === p.textContent)
         {
@@ -141,7 +148,7 @@ function handleLike(e){
             .then(res=>res.json())
             .then(data=>{
                 console.log(data)
-                menuItems[index].likes = data.likes
+                menuItems[index] = data.likes
             })
         }
     })
@@ -153,6 +160,7 @@ function handleClick(e) {
     const foodModalLabel = document.querySelector("#foodModalLabel")
     const image = document.querySelector(".modal-body img")
     const description = document.querySelector(".modal-body p")
+    const likes = document.querySelector("#likes")
     menuItems.find((item)=>{
         
         if (item.name === p.textContent){
@@ -160,17 +168,21 @@ function handleClick(e) {
             image.src = item.image
             image.alt = item.name
             description.textContent = item.description
-            
+            likes.textContent = item.likes
         }
     })
 }
 
 function updateDisplays(data){
     tableBody.innerHTML += `
-            <tr>
+            <tr id="${data.id}">
                 <td>${data.name}</td>
                 <td>${data.category}</td>
                 <td>${data.description}</td>
+                <td>
+                    <button type="button" class="editbtn">Edit</button>
+                    <button type="button" class="delbtn">Delete</button>
+                </td>
             </tr>
         `
     foodGallery.innerHTML += `
@@ -190,25 +202,26 @@ function updateDisplays(data){
             </div>
         </div>
     `  
+    editFood()
+    deleteFood()
 }
 
 function handleFileInput(e) {
     const file = e.target.files[0];
     const reader = new FileReader;
     reader.onload = ()=>{
-        // const blob = new Blob([reader.result])
         img = reader.result
     }  
     reader.readAsDataURL(file)
 }
-// "https://cdn.pixabay.com/photo/2022/06/07/20/52/curry-7249248_640.jpg"
-// assets/images/applepie.jpeg
+
 function filter(){
     let inputs = document.querySelectorAll("input[type='checkbox']");
     inputs.forEach((checkbox)=>{
         checkbox.addEventListener("change", handlefilter)
     })
 }
+
 function search (){
     const searchform = document.querySelector("form[role='search']")
     searchform.addEventListener('submit', handleSearch)
@@ -247,4 +260,78 @@ function handleSearch(e){
     })
     foodGallery.innerHTML = '' 
     foodDisplay(filtereditems)
+}
+function patchData(dataObj){
+    for (let key in dataObj){
+        if (dataObj[key] === "")
+        {
+            delete dataObj[key]
+        }
+    }
+    fetch(`${API_LINK}menuItems/${dataObj.id}`,{
+        method: 'PATCH',
+        headers: {
+            "Content-Type":"application/json",
+            "accept":"application/json"
+        },
+        body: JSON.stringify(dataObj)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        const tr = document.getElementById(data.id)
+        tr.innerHTML = `
+            <td>${data.name}</td>
+            <td>${data.category}</td>
+            <td>${data.description}</td>
+            <td>
+                <button type="button" class="editbtn">Edit</button>
+                <button type="button" class="delbtn">Delete</button>
+            </td>
+        `
+        menuItems[dataObj.id] = data
+        
+    })
+}
+
+function editFood(){
+    const edit = document.querySelectorAll(".editbtn") 
+    edit.forEach((editbtn =>{
+        editbtn.addEventListener("click", editItem)
+    }))
+} 
+
+function editItem(e){
+    const form = document.createElement("form")
+    let parent = e.target.parentNode.parentElement
+    const Update ={
+        id : parent.id,
+        name: prompt("Input updated name"),
+        diet: prompt("Input updated diet"),
+        category: prompt("Input updated category"),
+        short: prompt("Input updated short Description"),
+        description: prompt("Input updated Description")
+    }
+    patchData(Update)
+}
+
+function deleteFood() {
+    const del = document.querySelectorAll(".delbtn");
+    console.log(del)
+    del.forEach(delbtn =>{
+        delbtn.addEventListener("click", deleteItem)
+    })
+}
+
+function deleteItem(e){
+    let parent = e.target.parentNode.parentElement;
+    parent.remove()
+    console.log(parent)
+    fetch(`${API_LINK}menuItems/${parent.id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res=>res.json())
+    .then(data=>console.log(data))
 }
