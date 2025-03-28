@@ -1,9 +1,9 @@
 
-const API_LINK = "http://localhost:3000/"
+const API_LINK = "https://projectserver-te7c.onrender.com/api/"
 const tableBody = document.querySelector("tbody");
 let img;
 let menuItems = [];
-// https://projectserver-te7c.onrender.com/api/
+// 
 document.addEventListener("DOMContentLoaded", function main(){
     const form = document.querySelector("#form");
     document.querySelector("input[type='file']").addEventListener('change', handleFileInput)
